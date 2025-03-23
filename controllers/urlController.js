@@ -2,10 +2,9 @@ const validUrl = require('valid-url');
 const Url = require('../models/Url');
 const generateShortCode = require('../utils/generateShortCode');
 
-/**
- * Shorten a URL
- * POST /api/url/shorten
- */
+// Shorten URL
+// POST /api/url/shorten
+
 exports.shortenUrl = async (req, res) => {
   const { longUrl } = req.body;
   const { alias } = req.query;
@@ -32,7 +31,7 @@ exports.shortenUrl = async (req, res) => {
     let url = await Url.findOne({ longUrl });
 
     if (url) {
-      // If alias is provided and doesn't match existing one, return error
+      // If alias is provided but it doesn't match current one, return error
       if (alias && url.urlCode !== alias) {
         return res.status(409).json({
           success: false,
@@ -40,7 +39,7 @@ exports.shortenUrl = async (req, res) => {
         });
       }
       
-      // Return existing short URL
+      // Return current short URL
       return res.status(200).json(url);
     }
 
@@ -58,7 +57,7 @@ exports.shortenUrl = async (req, res) => {
       }
       urlCode = alias;
     } else {
-      // Generate a unique short code
+      // Generate unique short code
       urlCode = await generateShortCode();
     }
 
@@ -84,10 +83,9 @@ exports.shortenUrl = async (req, res) => {
   }
 };
 
-/**
- * Redirect to original URL
- * GET /:code
- */
+//  Redirect to original URL
+//  GET /:code
+
 exports.redirectToUrl = async (req, res) => {
   try {
     const { code } = req.params;
@@ -125,10 +123,9 @@ exports.redirectToUrl = async (req, res) => {
   }
 };
 
-/**
- * Get URL statistics
- * GET /api/url/:code/stats
- */
+// Get URL stats
+// GET /api/url/:code/stats
+
 exports.getUrlStats = async (req, res) => {
   try {
     const { code } = req.params;
@@ -143,7 +140,7 @@ exports.getUrlStats = async (req, res) => {
       });
     }
 
-    // Return URL statistics
+    // Return URL stats
     return res.status(200).json({
       urlCode: url.urlCode,
       longUrl: url.longUrl,

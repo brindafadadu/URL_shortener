@@ -28,9 +28,9 @@ const urlSchema = new mongoose.Schema({
   expiresAt: {
     type: Date,
     default: () => {
-      // Default expiration: 1 year from creation
+
       const date = new Date();
-      date.setFullYear(date.getFullYear() + 1);
+      date.setFullYear(date.getFullYear() + 1); //1 year from now, expiration time
       return date;
     }
   }

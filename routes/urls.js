@@ -5,7 +5,7 @@ const urlController = require('../controllers/urlController');
 // Create a short URL
 router.post('/shorten', urlController.shortenUrl);
 
-// Get URL statistics
+// Get URL stats
 router.get('/:code/stats', urlController.getUrlStats);
 
 module.exports = router;

@@ -4,20 +4,17 @@ const connectDB = require('./config/db');
 const urlRoutes = require('./routes/urls');
 const urlController = require('./controllers/urlController');
 
-// Load environment variables
-dotenv.config();
+dotenv.config(); // Load environment variables
 
-// Connect to database
-connectDB();
+connectDB(); // Connect to database
 
-// Initialize app
-const app = express();
+const app = express(); // Initialize app
 
-// Body parser middleware
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Set up routes
+// Setting up routes
 app.use('/api/url', urlRoutes);
 
 // Redirect route - needs to be at the top level
@@ -25,7 +22,7 @@ app.get('/:code', urlController.redirectToUrl);
 
 // Basic home route
 app.get('/', (req, res) => {
-  res.send('URL Shortener API - See README for documentation');
+  res.send('URL Shortener API is open, see README for usage');
 });
 
 // Define port

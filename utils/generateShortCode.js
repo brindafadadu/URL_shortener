@@ -6,16 +6,17 @@ const Url = require('../models/Url');
  * @param {number} length - Length of the short code (default: 6)
  * @returns {Promise<string>} - Unique short code
  */
+
 const generateShortCode = async (length = 6) => {
-  // Create a short code using nanoid
-  const shortCode = nanoid(length);
   
-  // Check if this code already exists in the database
-  const existing = await Url.findOne({ urlCode: shortCode });
+  const shortCode = nanoid(length); //Generate randome code using nanoid
   
-  // If code exists, recursively generate a new one
+
+  const existing = await Url.findOne({ urlCode: shortCode }); //Check if this coe already exists
+  
+  
   if (existing) {
-    return generateShortCode(length);
+    return generateShortCode(length); //If code exists, generate a new one
   }
   
   return shortCode;
