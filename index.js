@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const urlRoutes = require('./routes/urls');
-const urlController = require('./controllers/urlController');
+const urlController = require('./controller/urlController');
 
 dotenv.config(); // Load environment variables
 
