@@ -64,7 +64,7 @@ exports.shortenUrl = async (req, res) => {
     // Create short URL
     const shortUrl = `${baseUrl}/${urlCode}`;
 
-    // Create new URL entry
+    // Create new URL
     url = new Url({
       longUrl,
       shortUrl,
